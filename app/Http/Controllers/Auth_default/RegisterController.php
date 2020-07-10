@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/home';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -61,30 +60,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    public function __invoke(Request $request)
-    {   
-        // $user = new User;
-        // $user->name = $request->name;
-        // $user->email = $request->email;
-        // $user->password = bcrypt($request->password);
-
-        // if($user->save()){
-        //     return $user;
-        // }
-        $user = User::where('email' , $request->email)->first();
-        
-        if($user){
-            return response()->json([
-                'Error' => 'user exist'
-            ],400);
-        }
-
-        $user = User::firstOrCreate([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+    protected function create(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
         ]);
-
-        return $user;
     }
 }
