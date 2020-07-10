@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class MeController extends Controller
 {
@@ -33,6 +34,21 @@ class MeController extends Controller
 
         $posts = $user->posts()->get();
         return $posts;
+    }
+
+    public function myFriends(){
+        $user = auth()->user();
+        if(!$user){
+            return response()->json([
+                'Error' => 'something went wrong'
+            ],404);
+        }
+
+        $user_id = $user->id;
+        $friends = DB::table('users')->where('id', '>', $user_id)->get();
+
+        return $friends;
+
     }
 
     public function update(Request $request){

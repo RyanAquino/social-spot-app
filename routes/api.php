@@ -37,4 +37,5 @@ Route::post('posts/{id}/comment', 'PostController@comment');
 Route::get('user/profile', 'Auth\MeController@index');
 Route::post('user/profile/update', 'Auth\MeController@update');
 Route::get('user/posts', 'Auth\MeController@get_posts');
+Route::get('user/friends', 'Auth\MeController@myFriends');
 
