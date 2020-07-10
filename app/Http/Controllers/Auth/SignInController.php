@@ -14,7 +14,7 @@ class SignInController extends Controller
 
         if(!$token){
             return response()->json([
-                'error' => 'incorrect email/password'
+                'Error' => 'incorrect email/password'
             ],401);
         }
 
