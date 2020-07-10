@@ -24,6 +24,14 @@ class MeController extends Controller
         ]);
     }
 
+    public function user(Request $request){
+        $user = auth()->user();
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }
+
     public function get_posts(Request $request){
         $user = auth()->user();
         if(!$user){

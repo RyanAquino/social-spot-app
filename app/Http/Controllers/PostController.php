@@ -24,20 +24,9 @@ class PostController extends Controller
     public function index()
     {
         // Get all posts
-        // $posts = Post::paginate(15);
-        $posts = Post::all();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(5);
 
         return PostResource::collection($posts);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -61,7 +50,6 @@ class PostController extends Controller
 
     public function like(Request $request)
     {
-        //
         $post = Post::find($request->route('id'));
 
         if(!$post){
