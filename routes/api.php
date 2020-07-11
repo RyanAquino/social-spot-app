@@ -34,9 +34,15 @@ Route::put('posts/{id}/like', 'PostController@like');
 // Comment on post
 Route::post('posts/{id}/comment', 'PostController@comment');
 
+
+//get comment of a post
+Route::get('posts/{id}/comments', 'CommentController@getPostComments');
+
+
 //user
 Route::get('user/profile', 'Auth\MeController@index');
 Route::post('user/profile/update', 'Auth\MeController@update');
 Route::get('user/posts', 'Auth\MeController@get_posts');
 Route::get('user/friends', 'Auth\MeController@myFriends');
+
 
