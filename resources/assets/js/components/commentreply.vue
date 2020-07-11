@@ -24,7 +24,7 @@ export default {
         
     },
     methods:{
-        async addReply1(){
+        async addReply(){
             this.loading = true;
             let postId = this.postid;
             let commentId = this.commentid;
@@ -36,8 +36,7 @@ export default {
             }
 
             let data = {
-                'comment': this.reply,
-                'post_id': postId
+                'reply': this.reply,
             };
 
             const req = await fetch(`http://localhost:8000/api/posts/comments/${commentId}/reply`, {

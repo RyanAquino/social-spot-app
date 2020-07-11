@@ -9,16 +9,15 @@
             <li class="list-group-item" v-for=" (singleComment, i) in singlePost" v-bind:key="i">
                 <div v-if="singleComment">
                     <p>{{ singleComment.comment}} </p>
-                    <p><small>By: {{ singleComment.name}} </small></p>
-                    <ul>
-                        <li>
-                            <p>test reply</p>
-                            <small>by: test</small>
-                        </li>
-                    </ul>
-                    <commentreply v-bind:postid="singlePost[i].post_id" v-bind:commentid="singleComment.id"></commentreply>
+                    <p><small>By: {{ singleComment.name }} </small></p>
+                    <p><strong>Reply:</strong></p>
+                    <li v-if="singleComment.reply">
+                        <p>{{ singleComment.reply }}</p>
+                        <p><small>By: {{ singleComment.user }} </small></p>
+                    </li>
+                    <commentreply v-else v-bind:postid="singlePost[i].post_id" v-bind:commentid="singleComment.id"></commentreply>
                 </div>
-                <p v-else> No Comments yet  </p>
+                <p v-else> No Comments yet</p>
             </li>
         </ul>
     </div>
@@ -46,6 +45,10 @@ export default {
       this.$root.$on('commented', (text) => {
         this.getComments();
       });
+
+      this.$root.$on('replied', (text) => {
+        this.getComments();
+      });
     },
     created(){
         this.getComments();
@@ -69,8 +72,41 @@ export default {
                 }
             });
             const res = await req.json();
+            for(let i=0; i < res.length; i++){
+                let data = await this.getReply(res[i].id);
+                if(data.Error){
+                    continue
+                }else{
+                    res[i].reply = data.reply;
+                    res[i].user = data.user;
+                }
+            }
             this.comments.push(res);
             this.loading = false;
+        },
+        async getReply(id){
+            this.loading = true;
+            let token = localStorage.getItem('token');
+
+            if(!token){
+                console.log('no token');
+                return;
+            }
+
+            const req = await fetch(`http://localhost:8000/api/posts/comments/${id}/reply`, {
+                headers: {
+                    "Accept": "application/json",
+                    'Content-type': "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const res = await req.json();
+
+            if(res.message){
+                return null;
+            }
+
+            return res;
         }
     }   
 }
