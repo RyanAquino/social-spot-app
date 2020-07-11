@@ -31,7 +31,9 @@
 					  </div>
                       
                       <div class="d-flex justify-content-center">
-					    <button type="submit" class="btn btn-lg btn-success text-center">Register</button>
+					    <button type="submit" class="btn btn-lg btn-success text-center">Register
+							<span v-if="loading" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status" aria-hidden="true"></span>
+						</button>
                       </div>
 					</form>
 				</div>
@@ -50,12 +52,14 @@ export default {
 			password:'',
 			password_verify:'',
 			errors:[],
+			loading:false,
 			success:false
 		}
 	},
 	methods: {
 		async onSubmit(){
 			this.errors = [];
+			this.loading = true;
 
 			if(!this.name || !this.email || !this.password || !this.password_verify){
 				this.errors.push('Please fill out required fields');
@@ -83,14 +87,13 @@ export default {
 			});
 
 			const response = await req.json();
-
+			this.loading = false;
+						
 			if(response.Error){
 				this.errors.push('Email already taken');
 				return;
 			}
-
 			this.success = true;
-
 			setTimeout(() => {
 				this.$router.push('/login');
 			}, 3000);

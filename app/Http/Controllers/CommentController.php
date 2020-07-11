@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
 {
-    //
     public function __construct() {
         $this->middleware(['auth:api']);
     }
@@ -17,11 +16,19 @@ class CommentController extends Controller
     public function getPostComments(Request $request){
         $post_id = $request->route('id');
 
-        $comments = DB::table('comments')
-        ->join('users','comments.user_id','=','users.id')
+        $comments = DB::table('users')
+        ->join('comments','comments.user_id','=','users.id')
         ->where('comments.post_id','=',$post_id)->orderBy('comments.created_at','desc')->get();
 
         return $comments;
 
+    }
+
+    public function replyToComment(Request $request){
+      
+    }
+
+    public function getReplyComment(Request $request){
+        
     }
 }

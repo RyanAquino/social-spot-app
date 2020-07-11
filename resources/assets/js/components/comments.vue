@@ -6,11 +6,17 @@
             </div>
         </div>
         <ul class="list-group list-group-flush" v-for="(singlePost, index) in this.comments" :key="index">
-            <li class="list-group-item" v-for=" (singleComment, i) in singlePost" v-bind:key="i"> 
+            <li class="list-group-item" v-for=" (singleComment, i) in singlePost" v-bind:key="i">
                 <div v-if="singleComment">
                     <p>{{ singleComment.comment}} </p>
                     <p><small>By: {{ singleComment.name}} </small></p>
-                    <commentreply></commentreply>
+                    <ul>
+                        <li>
+                            <p>test reply</p>
+                            <small>by: test</small>
+                        </li>
+                    </ul>
+                    <commentreply v-bind:postid="singlePost[i].post_id" v-bind:commentid="singleComment.id"></commentreply>
                 </div>
                 <p v-else> No Comments yet  </p>
             </li>
@@ -31,13 +37,15 @@ export default {
     data(){
         return {
             comments:[],
+            replies: [],
+            commentid:null,
             loading:false
         }
     },
     mounted(){
       this.$root.$on('commented', (text) => {
         this.getComments();
-      })
+      });
     },
     created(){
         this.getComments();

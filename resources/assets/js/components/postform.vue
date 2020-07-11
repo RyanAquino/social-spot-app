@@ -32,7 +32,6 @@ export default {
     methods: {
         async addPost(){
             this.loading = true;
-            
             event.target.reset();
             let token = localStorage.getItem('token');
 
@@ -63,9 +62,10 @@ export default {
 
             const resp = await req.json();
 
-            this.post = '';
+            
             this.$root.$emit('posted', 'new message!');
             this.loading = false;
+            this.post = '';
         }
     }
 }
