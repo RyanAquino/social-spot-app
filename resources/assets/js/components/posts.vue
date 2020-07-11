@@ -1,22 +1,22 @@
 <template>
     <div class="container">
         <h3 class="text-center">News feed</h3>
+            <div class="d-flex justify-content-center" v-if="loading">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
             <div class="card card-body mb-2" v-for="post in this.posts" v-bind:key="post.id">
                 <p>{{ post.body}}</p>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                <form class="form-inline mt-2"  v-on:submit.prevent="">
-                    
-                    <div class="form-group mb-2">
-                        <label class="sr-only">comment</label>
-                        <input type="password" class="form-control" placeholder="comment here...">
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">Add comment</button>
-                </form>
-                <button  type="submit" class="btn btn-info ml-4" @click="likePost(post.id, pagination.current_page)">
-                        Likes: {{ post.likes }}
-                        <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>    
-                </button>
-            </div>
+                    <comment v-bind:postid="post.id"></comment>
+                    <button  type="submit" class="btn btn-info ml-4" @click="likePost(post.id, pagination.current_page)">
+                            Likes: {{ post.likes }}
+                    </button>
+                </div>
+                    <p>Comments:</p>
+                    <comments v-bind:postid="post.id"></comments>
+
         </div>
         <nav aria-label="Page navigation example text-center">
             <ul class="pagination">
@@ -29,9 +29,16 @@
 </template>
 
 <script>
+import comment from '../components/comment';
+import comments from '../components/comments';
+
 export default {
     name:'posts',
     props:['userHome'],
+    components:{
+        comment,
+        comments
+    },
     data(){
         return {
             posts: [],
@@ -40,20 +47,21 @@ export default {
                 body: '',
                 likes:0,
             },
-            loading: false,
+            loading:false,
             pagination:{},
         }
     },
     mounted(){
-      this.$root.$on('posted', (text) => { // here you need to use the arrow function
+      this.$root.$on('posted', (text) => {
         this.getPosts();
-      })  
+      })
     },
     created(){
         this.getPosts();
     },
     methods: {
         async getPosts(page_url){
+            this.loading = true;
             let vm = this;
 
             let token = localStorage.getItem('token');
@@ -79,6 +87,7 @@ export default {
             }
             this.posts = resp.data;
             vm.makePagination(resp.meta, resp.links);
+            this.loading = false;
         },
         makePagination(meta, links){
             let pagination = {
@@ -109,7 +118,6 @@ export default {
             });
             const resp = await req.json();
             this.getPosts(`http://localhost:8000/api/posts?page=${page}`);
-            this.loading = false;
         }
     }
 }
