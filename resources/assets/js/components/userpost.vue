@@ -1,6 +1,11 @@
 <template>
     <div class="container">
-        <h3 class="text-center">My Posts</h3>
+        <h3 class="text-center">My Recent Posts</h3>
+        <div class="d-flex justify-content-center" v-if="loading">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
         <div class="card card-body mb-2" v-for="post in this.posts" v-bind:key="post.id">
                 <p>{{ post.body}}</p>
         </div>
@@ -18,11 +23,17 @@ export default {
                 body: '',
                 likes:0,
             },
+            loading:true,
             pagination:{},
         }
     },
     created(){
         this.getPosts();
+    },
+    mounted(){
+      this.$root.$on('posted', (text) => {
+        this.getPosts();
+      });
     },
     methods: {
         async getPosts(){
@@ -43,7 +54,7 @@ export default {
             const resp = await req.json();
 
             this.posts = resp;
-
+            this.loading = false;
         }
     }
 }

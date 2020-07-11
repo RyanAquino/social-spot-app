@@ -40,7 +40,7 @@ class MeController extends Controller
             ],404);
         }
 
-        $posts = $user->posts()->get();
+        $posts = $user->posts()->take(8)->get();
         return $posts;
     }
 

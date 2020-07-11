@@ -1,6 +1,11 @@
 <template>
     <div class="container">
         <h3 class='text-center'>Friends</h3>
+        <div class="d-flex justify-content-center" v-if="loading">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
         <ul class="list-group">
             <li class="list-group-item" v-for="friend in this.friends" v-bind:key="friend.id">{{ friend.name}}</li>
         </ul>
@@ -13,7 +18,8 @@ export default {
     props:['userHome'],
     data(){
         return {
-            friends:[]
+            friends:[],
+            loading:true
         }
     },
     created(){
@@ -36,6 +42,7 @@ export default {
             });
             const resp = await req.json();
             this.friends = resp;
+            this.loading = false;
         }
     }
 }
