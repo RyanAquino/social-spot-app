@@ -34,7 +34,11 @@
                         </div>
                         
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-success text-center">Update profile</button>
+                            <button type="submit" class="btn btn-success text-center">
+                                Update profile
+                                <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            </button>
+                            
                         </div>
                         </form>
                     </div>
@@ -63,7 +67,8 @@ export default {
             password:'',
             password_verify:'',
             post:'',
-			errors:[],
+            errors:[],
+            loading: false,
 			success:false
 		}
     },
@@ -76,6 +81,7 @@ export default {
     },
 	methods: {
         async onSubmit(e){
+            this.loading = true;
             let token = localStorage.getItem('token');
 
             if(!token){
@@ -106,6 +112,8 @@ export default {
 
             const response = await req.json();
             this.success = true;
+            this.loading = false;
+
         },
         async getProfile(){
             let token = localStorage.getItem('token');

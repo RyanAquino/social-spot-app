@@ -7,7 +7,7 @@
                 </posts>
             </div>
             <div class="col-6">
-                <postform></postform>
+                <postform :app="this.app"></postform>
                 <friends></friends>
             </div>
         </div>

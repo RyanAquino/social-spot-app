@@ -1,17 +1,22 @@
 <template>
     <div class="container">
         <h3 class="text-center">News feed</h3>
-        <div class="card card-body mb-2" v-for="post in this.posts" v-bind:key="post.id">
+            <div class="card card-body mb-2" v-for="post in this.posts" v-bind:key="post.id">
                 <p>{{ post.body}}</p>
-                <button class="btn btn-info" @click="likePost(post.id, pagination.current_page)">Like {{ post.likes }}</button>
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                 <form class="form-inline mt-2"  v-on:submit.prevent="">
+                    
                     <div class="form-group mb-2">
-                        <label for="comment" class="sr-only">comment</label>
-                        <input type="password" class="form-control" id="comment" placeholder="comment here...">
+                        <label class="sr-only">comment</label>
+                        <input type="password" class="form-control" placeholder="comment here...">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Add comment</button>
                 </form>
-
+                <button  type="submit" class="btn btn-info ml-4" @click="likePost(post.id, pagination.current_page)">
+                        Likes: {{ post.likes }}
+                        <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>    
+                </button>
+            </div>
         </div>
         <nav aria-label="Page navigation example text-center">
             <ul class="pagination">
@@ -35,8 +40,14 @@ export default {
                 body: '',
                 likes:0,
             },
+            loading: false,
             pagination:{},
         }
+    },
+    mounted(){
+      this.$root.$on('posted', (text) => { // here you need to use the arrow function
+        this.getPosts();
+      })  
     },
     created(){
         this.getPosts();
@@ -80,6 +91,7 @@ export default {
             this.pagination = pagination;
         },
         async likePost(id, page){
+            this.loading = true;
             let token = localStorage.getItem('token');
             
             if(!token){
@@ -97,6 +109,7 @@ export default {
             });
             const resp = await req.json();
             this.getPosts(`http://localhost:8000/api/posts?page=${page}`);
+            this.loading = false;
         }
     }
 }
