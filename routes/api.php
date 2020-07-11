@@ -34,9 +34,9 @@ Route::post('posts/{id}/comment', 'PostController@comment');
 //get comment of a post
 Route::get('posts/{id}/comments', 'CommentController@getPostComments');
 //reply to comment
-// Route::post('posts/comments/{id}/reply', 'CommentController@replyToComment');
+Route::post('posts/comments/{id}/reply', 'ReplyController@store');
 //get reply
-// Route::get('posts/comments/{id}/reply', 'CommentController@getReplyComment');
+Route::get('posts/comments/{id}/reply', 'ReplyController@show');
 
 //user
 Route::get('user/profile', 'Auth\MeController@index');
