@@ -18,7 +18,9 @@
 					  </div>
                       
                       <div class="d-flex justify-content-center">
-					    <button type="submit" class="btn btn-lg btn-success text-center">Login</button>
+					    <button type="submit" class="btn btn-lg btn-success text-center">Login
+							<span v-if="loading" class="spinner-border" style="width: 1.5rem; height: 1.5rem;" role="status" aria-hidden="true"></span>
+						</button>
                       </div>
 					</form>
 				</div>
@@ -34,12 +36,14 @@ export default {
 		return {
             email:'',
             password:'',
-			errors:[]
+			errors:[],
+			loading:false
 		}
     },
     methods: {
         async onSubmit(){
-            this.errors = [];
+			this.errors = [];
+			this.loading = true;
 
             if(!this.email || !this.password){
 				this.errors.push('Please fill out required fields');
@@ -61,6 +65,7 @@ export default {
 			});
 
             const response = await req.json();
+			this.loading = false;
             
             if(response.Error){
                 this.errors.push(response.Error);

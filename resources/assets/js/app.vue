@@ -34,7 +34,7 @@ export default {
             if(this.token && this.$route.fullPath == '/'){
                 this.$router.push('/home');
             }
-            if(!this.token){
+            if(!this.token  && this.$route.fullPath != '/login'){
                 this.$router.push('/login');
             }
         }
