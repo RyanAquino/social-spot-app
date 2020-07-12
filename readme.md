@@ -22,8 +22,8 @@ To run this project:
 `DB_PASSWORD=`
 5. Create database manually
 6. Setup database tables - `php artisan migrate:refresh`
-7. run the following commands:
-`php artisan key:generate
-php artisan jwt:secret`
+7. run the following commands: \
+`php artisan key:generate` \
+`php artisan jwt:secret`
 8. Serve the application `php artisan serve`
 9. Access the application `http://localhost:8000`
