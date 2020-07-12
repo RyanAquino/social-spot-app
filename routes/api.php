@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 Route::group(['prefix' => 'auth', 'namespace' => 'Auth'], function() {
     Route::post('signup', 'RegisterController');
     Route::post('signin', 'SignInController');
-    Route::post('signout', 'SignOutController');
+    Route::delete('signout', 'SignOutController');
 });
 
 // Post Actions

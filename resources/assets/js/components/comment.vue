@@ -2,7 +2,7 @@
     <form class="form-inline mt-2"  v-on:submit.prevent="addComment">
         <div class="form-group mb-2">
             <label class="sr-only">comment</label>
-            <input type="text" class="form-control" placeholder="comment here..." v-model="comment">
+            <input type="text" class="form-control" placeholder="comment here..." v-model="comment" required>
         </div>
         <button type="submit" class="btn btn-primary mb-2">Add comment
             <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
