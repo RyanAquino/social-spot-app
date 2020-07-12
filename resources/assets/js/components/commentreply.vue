@@ -39,7 +39,7 @@ export default {
                 'reply': this.reply,
             };
 
-            const req = await fetch(`http://localhost:8000/api/posts/comments/${commentId}/reply`, {
+            const req = await fetch(`api/posts/comments/${commentId}/reply`, {
                 method:'POST',
                 headers: {
                     "Accept": "application/json",

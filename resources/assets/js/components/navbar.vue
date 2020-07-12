@@ -32,7 +32,7 @@ export default {
         async logout() {
             const token = localStorage.getItem('token');
 
-            const req = await fetch('http://localhost:8000/api/auth/signout', {
+            const req = await fetch('api/auth/signout', {
                 method:'DELETE',
                 headers: {
                     "Accept": "application/json",

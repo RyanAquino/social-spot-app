@@ -77,7 +77,7 @@ export default {
 				password: this.password
 			}
 
-			const req = await fetch('http://localhost:8000/api/auth/signup',{
+			const req = await fetch('api/auth/signup',{
 				method:'POST',
 				headers: {
 					'Content-type': 'application/json',

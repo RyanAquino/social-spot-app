@@ -32,7 +32,7 @@ export default {
                 return this.$routers.push('/login');
             }
 
-            const req = await fetch('http://localhost:8000/api/user/friends', {
+            const req = await fetch('api/user/friends', {
                 headers: {
                     "Accept": "application/json",
                     'Content-type': "application/json",

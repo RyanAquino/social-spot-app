@@ -41,7 +41,7 @@ export default {
                 comment:this.comment
             };
 
-            const req = await fetch(`http://localhost:8000/api/posts/${this.postid}/comment`, {
+            const req = await fetch(`api/posts/${this.postid}/comment`, {
                 method:'POST',
                 headers: {
                     "Accept": "application/json",

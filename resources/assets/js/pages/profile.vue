@@ -101,7 +101,7 @@ export default {
                 email: this.email,
                 password: this.password
             }
-            const req = await fetch('http://localhost:8000/api/user/profile/update',{
+            const req = await fetch('api/user/profile/update',{
 				method:'POST',
 				headers: {
 					'Content-type': 'application/json',
@@ -129,7 +129,7 @@ export default {
                 return;
             }
 
-            const req = await fetch('http://localhost:8000/api/user/profile', {
+            const req = await fetch('api/user/profile', {
                 headers: {
                     "Accept": "application/json",
                     'Content-type': "application/json",

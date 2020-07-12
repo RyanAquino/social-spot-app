@@ -49,7 +49,7 @@ export default {
                 body:this.post
             };
 
-            const req = await fetch('http://localhost:8000/api/posts', {
+            const req = await fetch('api/posts', {
                 method:'POST',
                 headers: {
                     "Accept": "application/json",

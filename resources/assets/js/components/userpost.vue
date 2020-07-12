@@ -45,7 +45,7 @@ export default {
                 return;
             }
 
-            const req = await fetch('http://localhost:8000/api/user/posts', {
+            const req = await fetch('api/user/posts', {
                 headers: {
                     "Accept": "application/json",
                     'Content-type': "application/json",

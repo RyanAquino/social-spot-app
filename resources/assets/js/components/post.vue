@@ -30,7 +30,7 @@ export default {
                 return;
             }
 
-            const req = await fetch(`http://localhost:8000/api/user/profile/${id}`, {
+            const req = await fetch(`api/user/profile/${id}`, {
                 headers: {
                     "Accept": "application/json",
                     'Content-type': "application/json",

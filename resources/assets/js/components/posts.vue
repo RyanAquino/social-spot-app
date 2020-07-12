@@ -112,7 +112,7 @@ export default {
                 return;
             }
 
-            const req = await fetch(`http://localhost:8000/api/posts/${id}/like`, {
+            const req = await fetch(`api/posts/${id}/like`, {
                 method:'PUT',
                 headers: {
                     "Accept": "application/json",
@@ -121,7 +121,7 @@ export default {
                 }
             });
             const resp = await req.json();
-            this.getPosts(`http://localhost:8000/api/posts?page=${page}`);
+            this.getPosts(`api/posts?page=${page}`);
         }
     }
 }

@@ -64,7 +64,7 @@ export default {
                 return;
             }
 
-            const req = await fetch(`http://localhost:8000/api/posts/${this.postid}/comments`, {
+            const req = await fetch(`api/posts/${this.postid}/comments`, {
                 headers: {
                     "Accept": "application/json",
                     'Content-type': "application/json",
@@ -91,7 +91,7 @@ export default {
                 return;
             }
 
-            const req = await fetch(`http://localhost:8000/api/posts/comments/${id}/reply`, {
+            const req = await fetch(`api/posts/comments/${id}/reply`, {
                 headers: {
                     "Accept": "application/json",
                     'Content-type': "application/json",
