@@ -15,13 +15,13 @@
                         <form v-on:submit.prevent="onSubmit">
                         <div class="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" name="name" class="form-control" v-model="name" v-if="this.name">
-                            <p v-else>Loading...</p>
+                            <input type="text" name="name" class="form-control" v-model="name">
+                            <!-- <p v-else>Loading...</p> -->
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" name="email" class="form-control" v-model="email" v-if="this.email">
-                            <p v-else>Loading...</p>
+                            <input type="email" name="email" class="form-control" v-model="email">
+                            <!-- <p v-else>Loading...</p> -->
                         </div>
 
                         <div class="form-group">
@@ -63,10 +63,10 @@ export default {
     name:'register',
 	data(){
 		return {
-			name:'',
-			email:'',
-            password:'',
-            password_verify:'',
+			name:null,
+			email:null,
+            password:null,
+            password_verify:null,
             post:'',
             errors:[],
             loading: false,
@@ -91,7 +91,8 @@ export default {
             }
 
             if(this.password != this.password_verify){
-				this.errors.push('Password does not match');
+                this.errors.push('Password does not match');
+                this.loading = false;
 				return;
 			}
 
@@ -100,7 +101,6 @@ export default {
                 email: this.email,
                 password: this.password
             }
-
             const req = await fetch('http://localhost:8000/api/user/profile/update',{
 				method:'POST',
 				headers: {
@@ -138,7 +138,6 @@ export default {
             });
 
             const resp = await req.json();
-
             const user = resp.user;
             this.name = user.name;
             this.email = user.email;

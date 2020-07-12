@@ -35,9 +35,18 @@ class MeController extends Controller
         $email = $request->email;
         $password= $request->password;
 
-        $user->name = $name;
+        
         $user->email = $email;
-        $user->password = bcrypt($password);
+
+        if($name){
+            $user->name = $name;
+        }
+        if($email) {
+            $user->email = $email;
+        }
+        if($password){
+            $user->password = bcrypt($password);
+        }
 
         if($user->save()){
             return $user;

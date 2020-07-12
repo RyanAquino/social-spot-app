@@ -2,7 +2,7 @@
     <form class="form-inline mt-2"  v-on:submit.prevent="addReply">
         <div class="form-group mb-2">
             <label class="sr-only">reply</label>
-            <input type="text" class="form-control" placeholder="reply here..." v-model="reply">
+            <input type="text" class="form-control" placeholder="reply here..." v-model="reply" required>
         </div>
         <button type="submit" class="btn btn-primary mb-2">Add reply
             <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

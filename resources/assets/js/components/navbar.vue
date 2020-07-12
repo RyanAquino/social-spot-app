@@ -30,7 +30,16 @@ export default {
     },
     methods: {
         async logout() {
-            const req = await fetch('http://localhost:8000/api/auth/signout').then(() => {
+            const token = localStorage.getItem('token');
+
+            const req = await fetch('http://localhost:8000/api/auth/signout', {
+                method:'DELETE',
+                headers: {
+                    "Accept": "application/json",
+                    'Content-type': "application/json",
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(() => {
                 this.app.token = null;
                 localStorage.removeItem('token');
                 this.$router.push('/login')
