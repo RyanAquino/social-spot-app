@@ -103,9 +103,6 @@ export default {
 
             this.pagination = pagination;
         },
-        async getUser(id){
-
-        },
         async likePost(id, page){
             this.loading = true;
             let token = localStorage.getItem('token');

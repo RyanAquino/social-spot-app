@@ -15,12 +15,13 @@
                         <form v-on:submit.prevent="onSubmit">
                         <div class="form-group">
                             <label for="name">Full Name</label>
-                            <input type="text" name="name" class="form-control" v-model="name">
-
+                            <input type="text" name="name" class="form-control" v-model="name" v-if="this.name">
+                            <p v-else>Loading...</p>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" name="email" class="form-control" v-model="email">
+                            <input type="email" name="email" class="form-control" v-model="email" v-if="this.email">
+                            <p v-else>Loading...</p>
                         </div>
 
                         <div class="form-group">
@@ -82,7 +83,7 @@ export default {
 	methods: {
         async onSubmit(e){
             this.loading = true;
-            let token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
             if(!token){
                 console.log('no token');
@@ -121,7 +122,7 @@ export default {
 
         },
         async getProfile(){
-            let token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
             if(!token){
                 console.log('no token');

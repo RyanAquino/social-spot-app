@@ -52,6 +52,7 @@ export default {
             });
 
             const resp = await req.json();
+            this.comment = '';
             this.$root.$emit('commented', 'new comment!');
             this.loading = false;
             

@@ -15,7 +15,6 @@
 <script>
 export default {
     name:'posts',
-    props:['userHome'],
     data(){
         return {
             friends:[],
@@ -27,7 +26,7 @@ export default {
     },
     methods: {
         async getFriends(){
-            let token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
             if(!token){
                 return this.$routers.push('/login');

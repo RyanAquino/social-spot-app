@@ -15,7 +15,6 @@ export default {
         navbar
     },
     data() {
-
         return {
             token:null,
             initiated:false,
@@ -26,7 +25,7 @@ export default {
     },
     methods: {
         init(){
-            let token_local = localStorage.getItem('token');
+            const token_local = localStorage.getItem('token');
 
             if(token_local){
                 this.token = token_local;

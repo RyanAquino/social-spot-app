@@ -38,7 +38,7 @@ export default {
     methods: {
         async getPosts(){
             this.loading = true;
-            let token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
             if(!token){
                 console.log('no token');
