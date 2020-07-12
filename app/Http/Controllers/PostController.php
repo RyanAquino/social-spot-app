@@ -11,11 +11,6 @@ use App\Http\Resources\Post as PostResource;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function __construct() {
         $this->middleware(['auth:api']);
@@ -23,22 +18,21 @@ class PostController extends Controller
 
     public function index()
     {
-        // Get all posts
         $posts = Post::orderBy('created_at', 'desc')->paginate(5);
 
         return PostResource::collection($posts);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // Add Post
+        if(!$request->body){
+            return response()->json([
+                'Error' => 'body field is required'
+            ]);
+        }
+
         $userId = auth()->user()->id;
+        
         $post = new Post;
         $post->user_id = $userId;
         $post->body = $request->body;
@@ -54,7 +48,7 @@ class PostController extends Controller
 
         if(!$post){
             return response()->json([
-                'Error' => 'not found'
+                'Error' => 'post not found'
             ], 404);
         }
 
@@ -67,7 +61,6 @@ class PostController extends Controller
 
     public function comment(Request $request)
     {
-        //
         $userId = auth()->user()->id;
         $post = Post::find($request->route('id'));
 
@@ -75,6 +68,12 @@ class PostController extends Controller
             return response()->json([
                 'Error' => 'post not found'
             ], 404);
+        }
+
+        if(!$request->comment){
+            return response()->json([
+                'Error' => 'comment required'
+            ]);
         }
 
         $comment = new Comment;

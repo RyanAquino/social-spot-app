@@ -74,9 +74,7 @@ export default {
             const res = await req.json();
             for(let i=0; i < res.length; i++){
                 let data = await this.getReply(res[i].id);
-                if(data.Error){
-                    continue
-                }else{
+                if(!data.Error){
                     res[i].reply = data.reply;
                     res[i].user = data.user;
                 }
@@ -101,10 +99,6 @@ export default {
                 }
             });
             const res = await req.json();
-
-            if(res.message){
-                return null;
-            }
 
             return res;
         }

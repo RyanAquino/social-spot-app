@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model implements JWTSubject
 {
-    //
     public function user(){
         return $this->belongsTo("App\User");
     }
@@ -20,12 +19,7 @@ class Post extends Model implements JWTSubject
     {
         return $this->getKey();
     }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
+    
     public function getJWTCustomClaims()
     {
         return [];
