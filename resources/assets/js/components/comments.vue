@@ -11,7 +11,7 @@
                     <p>{{ singleComment.comment}} </p>
                     <p><small>By: {{ singleComment.name }} </small></p>
                     <h6 class="mt-1">Reply:</h6>
-                    <div class="mt-2 ml-3" v-if="singleComment">
+                    <div class="mt-2 ml-3" v-if="singleComment.reply">
                             <p>{{ singleComment.reply }}</p>
                             <p><small>By: {{ singleComment.user }} </small></p>
                     </div>

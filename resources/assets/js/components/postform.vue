@@ -32,8 +32,7 @@ export default {
     methods: {
         async addPost(){
             this.loading = true;
-            event.target.reset();
-            let token = localStorage.getItem('token');
+            const token = localStorage.getItem('token');
 
             if(!token){
                 alert('not authenticated');
@@ -61,7 +60,6 @@ export default {
             });
 
             const resp = await req.json();
-
             
             this.$root.$emit('posted', 'new message!');
             this.loading = false;
