@@ -10,11 +10,11 @@
                 <div v-if="singleComment">
                     <p>{{ singleComment.comment}} </p>
                     <p><small>By: {{ singleComment.name }} </small></p>
-                    <p><strong>Reply:</strong></p>
-                    <li v-if="singleComment.reply">
-                        <p>{{ singleComment.reply }}</p>
-                        <p><small>By: {{ singleComment.user }} </small></p>
-                    </li>
+                    <h6 class="mt-1">Reply:</h6>
+                    <div class="mt-2 ml-3" v-if="singleComment">
+                            <p>{{ singleComment.reply }}</p>
+                            <p><small>By: {{ singleComment.user }} </small></p>
+                    </div>
                     <commentreply v-else v-bind:postid="singlePost[i].post_id" v-bind:commentid="singleComment.id"></commentreply>
                 </div>
                 <p v-else> No Comments yet</p>
@@ -105,3 +105,9 @@ export default {
     }   
 }
 </script>
+
+<style scoped>
+    p {
+        margin:0;
+    }
+</style>

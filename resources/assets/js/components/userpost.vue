@@ -23,7 +23,7 @@ export default {
                 body: '',
                 likes:0,
             },
-            loading:true,
+            loading:false,
             pagination:{},
         }
     },
@@ -37,6 +37,7 @@ export default {
     },
     methods: {
         async getPosts(){
+            this.loading = true;
             let token = localStorage.getItem('token');
 
             if(!token){

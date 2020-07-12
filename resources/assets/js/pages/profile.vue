@@ -9,7 +9,7 @@
                 <div class="alert alert-success" role="alert" v-if="this.success">
                     Successfully updated!
                 </div>
-                <div class="card mt-5">
+                <div class="card">
                     <div class="card-header text-center">My Profile</div>
                     <div class="card-body">
                         <form v-on:submit.prevent="onSubmit">
@@ -110,8 +110,13 @@ export default {
 				body: JSON.stringify(data)
 			});
 
-            const response = await req.json();
-            this.success = true;
+            const res = await req.json();
+
+            if(res.message) {
+                this.errors.push('Email already taken');
+            }else{
+                this.success = true;
+            }
             this.loading = false;
 
         },

@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="card card-body mb-2" v-for="post in this.posts" v-bind:key="post.id">
-                <p>{{ post.body}}</p>
+                <post v-bind:post="post"></post>
                 <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                     <comment v-bind:postid="post.id"></comment>
                     <button  type="submit" class="btn btn-info ml-4" @click="likePost(post.id, pagination.current_page)">
@@ -16,8 +16,8 @@
                             </svg>{{ post.likes }}
                     </button>
                 </div>
-                    <p>Comments:</p>
-                    <comments v-bind:postid="post.id"></comments>
+                <p>Comments:</p>
+                <comments v-bind:postid="post.id"></comments>
 
         </div>
         <nav aria-label="Page navigation example text-center">
@@ -33,13 +33,15 @@
 <script>
 import comment from '../components/comment';
 import comments from '../components/comments';
+import post from '../components/post';
 
 export default {
     name:'posts',
     props:['userHome'],
     components:{
         comment,
-        comments
+        comments,
+        post
     },
     data(){
         return {
@@ -100,6 +102,9 @@ export default {
             };
 
             this.pagination = pagination;
+        },
+        async getUser(id){
+
         },
         async likePost(id, page){
             this.loading = true;

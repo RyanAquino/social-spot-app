@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container mt-5">
 		<div class="alert alert-danger" v-if="errors.length">
 			<p class="text-center" v-for="(error,index) in errors" :key="index"> {{ error }} </p>
 		</div>

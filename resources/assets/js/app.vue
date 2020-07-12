@@ -1,6 +1,6 @@
 <template>
     <div>
-        <navbar :app="this" class="mb-2"></navbar>
+        <navbar :app="this" class="mb-2 mt-2"></navbar>
         <router-view :app="this"/>
     </div>
 </template>
@@ -12,7 +12,7 @@ import navbar from './components/navbar';
 export default {
     name:'app',
     components: {
-        navbar,
+        navbar
     },
     data() {
 
@@ -22,7 +22,7 @@ export default {
         }
     },
     mounted(){
-        this.init()
+        this.init();
     },
     methods: {
         init(){
@@ -41,3 +41,9 @@ export default {
     }
 }
 </script>
+
+<style>
+    body {
+        background-color: #f5f5f5;
+    }
+</style>

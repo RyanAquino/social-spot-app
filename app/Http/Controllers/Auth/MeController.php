@@ -14,7 +14,7 @@ class MeController extends Controller
         $this->middleware(['auth:api']);
     }
 
-    public function user(Request $request){
+    public function me(Request $request){
         $user = auth()->user();
 
         return response()->json([
@@ -22,14 +22,14 @@ class MeController extends Controller
         ]);
     }
 
+    public function getUser(Request $request){
+        $user = User::find($request->route('id'));
+
+        return $user;
+    }
+
     public function update(Request $request){
         $user = auth()->user();
-
-        if(!$request->name || !$request->email || !$request->password ){
-            return response()->json([
-                'Error' => 'form data required'
-            ]);
-        }
 
         $name = $request->name;
         $email = $request->email;

@@ -33,7 +33,8 @@ Route::get('posts/comments/{id}/reply', 'ReplyController@show');
 
 //User
 Route::group(['prefix' => 'user', 'namespace' => 'Auth'], function() {
-    Route::get('profile', 'MeController@user');
+    Route::get('profile', 'MeController@me');
+    Route::get('profile/{id}', 'MeController@getUser');
     Route::post('profile/update', 'MeController@update');
     Route::get('posts', 'MeController@getUserPosts');
     Route::get('friends', 'MeController@userFriends');
