@@ -18088,7 +18088,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 13:
                                 if (!(i < res.length)) {
-                                    _context.next = 26;
+                                    _context.next = 21;
                                     break;
                                 }
 
@@ -18099,26 +18099,20 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                 data = _context.sent;
 
                                 if (!data.Error) {
-                                    _context.next = 21;
-                                    break;
+                                    res[i].reply = data.reply;
+                                    res[i].user = data.user;
                                 }
 
-                                return _context.abrupt('continue', 23);
-
-                            case 21:
-                                res[i].reply = data.reply;
-                                res[i].user = data.user;
-
-                            case 23:
+                            case 18:
                                 i++;
                                 _context.next = 13;
                                 break;
 
-                            case 26:
+                            case 21:
                                 this.comments.push(res);
                                 this.loading = false;
 
-                            case 28:
+                            case 23:
                             case 'end':
                                 return _context.stop();
                         }
@@ -18167,18 +18161,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 10:
                                 res = _context2.sent;
-
-                                if (!res.message) {
-                                    _context2.next = 13;
-                                    break;
-                                }
-
-                                return _context2.abrupt('return', null);
-
-                            case 13:
                                 return _context2.abrupt('return', res);
 
-                            case 14:
+                            case 12:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -18450,7 +18435,7 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Reply: ")]),
+                      _vm._m(1, true),
                       _vm._v(" "),
                       singleComment.reply
                         ? _c("li", [
@@ -18493,6 +18478,12 @@ var staticRenderFns = [
       { staticClass: "spinner-border", attrs: { role: "status" } },
       [_c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [_c("strong", [_vm._v("Reply:")])])
   }
 ]
 render._withStripped = true
@@ -19336,7 +19327,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         }(),
         getProfile: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var token, req, resp;
+                var token, req, resp, user;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
@@ -19368,11 +19359,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
                             case 9:
                                 resp = _context2.sent;
+                                user = resp.user;
 
-                                this.name = resp.name;
-                                this.email = resp.email;
+                                this.name = user.name;
+                                this.email = user.email;
 
-                            case 12:
+                            case 13:
                             case 'end':
                                 return _context2.stop();
                         }

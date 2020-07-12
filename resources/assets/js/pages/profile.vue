@@ -132,8 +132,10 @@ export default {
             });
 
             const resp = await req.json();
-            this.name = resp.name;
-            this.email = resp.email;
+
+            const user = resp.user;
+            this.name = user.name;
+            this.email = user.email;
         }
     }
 }
