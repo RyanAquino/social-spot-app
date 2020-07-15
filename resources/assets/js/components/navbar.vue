@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <nav class="navbar navbar-dark bg-primary rounded-lg">
-        <a class="navbar-brand" href="/">DR Social Spot</a>
+        <a class="navbar-brand" href="/">Social Spot App</a>
         
         <form class="form">
             <div v-if="!this.app.token">
