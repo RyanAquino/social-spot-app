@@ -1,13 +1,15 @@
 
-# DR Social Spot
-A mini social media web application built with Laravel and Vue.js.
+# Social Spot App
+A mini social media web application built with Laravel and Vue.js hosted on heroku with PostgreSQL database.
 
 
 ## Technology
+* Bootstrap
 * PHP
 * JavaScript
 * Vue
 * Laravel
+* PosgreSQL
 * JWT Authentication
 
 ## Setup
