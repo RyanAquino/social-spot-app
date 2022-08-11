@@ -15,5 +15,8 @@
         "vue": "^2.5.7",
         "vue-router": "*"
     },
+    "engines": {
+        "node": "15.x"
+    },
     "dependencies": {}
 }
