@@ -1,0 +1,53 @@
+version: '3.8'
+# docker-compose up && docker-compose rm -fsv # run and remove on exit
+
+services:
+  db:
+    image: postgres
+    container_name: social-spot-app-db
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 10s
+      retries: 120
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    environment:
+      POSTGRES_PASSWORD: 1
+      POSTGRES_DB: social-spot
+
+  social-spot-app:
+    container_name: social-spot-app
+    build:
+      args:
+        user: ryan
+        uid: 1000
+      context: .
+      dockerfile: Dockerfile
+    image: cloudsigma.com/php
+    tty: true
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+    depends_on:
+      db:
+        condition: service_healthy
+
+  #Nginx Service
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    volumes:
+      - ./:/var/www/
+      - ./nginx:/etc/nginx/conf.d
+    tty: true
+    ports:
+      - "8000:80"
+    expose:
+      - "80"
+      - "8000"
+    depends_on:
+      - social-spot-app
